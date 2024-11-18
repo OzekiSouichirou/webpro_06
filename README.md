@@ -171,7 +171,7 @@ monthly_fortune.ejsを出力 --> ブラウザに運勢を表示;
 1. 以下の URL にアクセスする．
 - `http://localhost:8080/highlow`
 2. 表示される画面で，“High”または”Low”のボタンをクリックする．
-3. 結果を表示する．
+3. 結果と偽チバニーからのコメントが表示される．
 #### フローチャート
 ```mermaid
 flowchart TD;
