@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ハイアンドローゲーム</title>
+</head>
+<body>
+    <h1>ハイアンドローゲーム</h1>
+    <p>偽チバニーが持っているカードは <%= currentNumber %> です．</p>
+    <p>自分のカードが偽チバニーより高いか低いかを当ててください．</p>
+    <form method="get" action="/highlow">
+        <input type="hidden" name="currentNumber" value="<%= currentNumber %>">
+        <button type="submit" name="choice" value="high">High</button>
+        <button type="submit" name="choice" value="low">Low</button>
+    </form>
+</body>
+</html>

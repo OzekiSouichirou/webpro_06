@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>月の運勢占い</title>
+</head>
+<body>
+    <h1><%= month %>月の運勢占い</h1>
+    <p><%= fortune %></p>
+    <form method="get" action="/monthly-fortune">
+        <label for="month">月を入力してください（1〜12）:</label>
+        <input type="number" id="month" name="month" min="1" max="12" required>
+        <button type="submit">占う</button>
+    </form>
+</body>
+</html>
