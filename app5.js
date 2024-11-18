@@ -68,7 +68,7 @@ app.get("/janken", (req, res) => {
   res.render('janken', display);
 });
 
-// 新機能 1: 月の運勢うらない
+
 app.get("/monthly-fortune", (req, res) => {
   const month = Number(req.query.month) || 1;  
   const fortunes = {
@@ -90,7 +90,7 @@ app.get("/monthly-fortune", (req, res) => {
 });
 
 
-// 新機能 2: ハイアンドロー
+
 app.get("/highlow", (req, res) => {
   let currentNumber = Number(req.query.currentNumber) || Math.floor(Math.random() * 13) + 1;
   const playerChoice = req.query.choice;
@@ -103,7 +103,7 @@ app.get("/highlow", (req, res) => {
     let result = '';
     if ((playerChoice === 'high' && nextNumber > currentNumber) ||
         (playerChoice === 'low' && nextNumber < currentNumber)) {
-      result = 'Win(偽チバニーからのコメント:すごーい！)';
+      result = 'Win(偽チバニーからのコメント:すごーい！きみの勝ちだ！)';
     } else if (nextNumber === currentNumber) {
       result = '引き分け(偽チバニーからのコメント:もう一回だ！)';
     } else {
