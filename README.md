@@ -3,11 +3,17 @@
 ## 概要
 `app5.js` は，node.js 環境で動作する簡易的なウェブアプリケーションであり，ユーザーに対してさまざまな機能を提供するものである．このプログラムは，`express` モジュールを利用してサーバーを構築し，`ejs` テンプレートエンジンを用いて動的なHTMLを生成する．以下の機能を含む：
 - 挨拶を表示する簡単な機能（/hello1, /hello2）
-- 静的ファイルを表示する機能（/icon）
-- サイコロを振って運勢を占う機能（/luck）
+http://localhost:8080/hello1 http://localhost:8080/hello2
+- Appleのロゴを表示する機能（/icon）
+http://localhost:8080/icon
+- 1-6のランダムな数値で運勢を占う機能（/luck）
+http://localhost:8080/luck
 - じゃんけんゲーム（/janken）
+http://localhost:8080/janken
 - 月間運勢占い機能（/monthly-fortune）
+http://localhost:8080/monthly-fortune
 - ハイアンドローゲーム（/highlow）
+http://localhost:8080/highlow
 
 ## ファイル一覧
 
@@ -115,7 +121,7 @@ luck.ejsを出力 --> ブラウザに運勢を表示;
 /janken にアクセスすると，ユーザーとコンピュータがじゃんけんを行い，結果を表示する．
 #### 使用手順
 1. 以下の URL にアクセスする．
-- `http://localhost:8080/public/janken`
+- `http://localhost:8080/janken`
 2. 表示される画面で，グー，チョキ，パーのいずれかを選択する．
 3. 結果を表示する．
 #### フローチャート
@@ -140,7 +146,7 @@ janken.ejsを出力 --> ブラウザに結果を表示;
 
 #### 使用手順
 1. 以下の URL にアクセスする．
-- `http://localhost:8080/public/janken`
+- `http://localhost:8080/monthly-fortune`
 2. 表示されるフォームで，1から12の間の月を入力する．
 3. “占う”ボタンをクリックすると，その月の運勢が表示される．
 #### フローチャート
