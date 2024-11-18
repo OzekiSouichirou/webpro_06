@@ -103,7 +103,7 @@ app.get("/highlow", (req, res) => {
     let result = '';
     if ((playerChoice === 'high' && nextNumber > currentNumber) ||
         (playerChoice === 'low' && nextNumber < currentNumber)) {
-      result = 'Win(偽チバニーのコメント:すごーい！)';
+      result = 'Win(偽チバニーからのコメント:すごーい！)';
     } else if (nextNumber === currentNumber) {
       result = '引き分け(偽チバニーからのコメント:もう一回だ！)';
     } else {
