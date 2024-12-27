@@ -20,14 +20,13 @@ http://localhost:8080/highlow
 ファイル名 | 説明
 -|-
 app5.js | プログラム本体
-public/janken.html | じゃんけんの開始画面
-icon.ejs | iconのテンプレートエンジン
-janken.ejs | jankenのテンプレートエンジン
-luck.ejs | luckのテンプレートエンジン
-show.ejs | showのテンプレートエンジン
-monthly_fortune.ejs | 月の運勢占いを表示するテンプレートエンジン
-highlow.ejs | ハイアンドローゲームの入力画面テンプレートエンジン
-highlow_result.ejs | ハイアンドローゲームの結果表示テンプレートエンジン
+views/icon.ejs | iconのテンプレートエンジン
+views/janken.ejs | jankenのテンプレートエンジン
+views/luck.ejs | luckのテンプレートエンジン
+views/show.ejs | showのテンプレートエンジン
+views/monthly_fortune.ejs | 月の運勢占いを表示するテンプレートエンジン
+views/highlow.ejs | ハイアンドローゲームの入力画面テンプレートエンジン
+views/highlow_result.ejs | ハイアンドローゲームの結果表示テンプレートエンジン
 public/Apple_logo_black.svg | Apple ロゴの SVG アイコンファイル
 
 
