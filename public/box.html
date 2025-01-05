@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>エイトトゥエルブNOW</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 20px;
+      }
+      h1 {
+        color: green;
+      }
+      #itemsArea div {
+        margin-bottom: 8px;
+      }
+      button {
+        font-size: 1rem;
+        padding: 0.5em 1em;
+        border: 1px solid #007bff;
+        background-color: #fff;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+      button:hover {
+        background-color: #f0f8ff;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>エイトトゥエルブNOWへようこそ</h1>
+    <p>架空のコンビニ「エイトトゥエルブ」の在庫を確認する簡易 SPA である．</p>
+
+    <!-- 在庫一覧取得ボタン -->
+    <button id="showItems">商品一覧を表示</button>
+
+    <!-- 在庫一覧を表示する領域 -->
+    <div id="itemsArea"></div>
+
+    <!-- クライアントサイドの JS -->
+    <script src="box.js"></script>
+  </body>
+</html>
