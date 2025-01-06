@@ -1,43 +1,63 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <title>エイトトゥエルブNOW</title>
-    <style>
-      body {
-        font-family: sans-serif;
-        margin: 20px;
-      }
-      h1 {
-        color: green;
-      }
-      #itemsArea div {
-        margin-bottom: 8px;
-      }
-      button {
-        font-size: 1rem;
-        padding: 0.5em 1em;
-        border: 1px solid #007bff;
-        background-color: #fff;
-        cursor: pointer;
-        border-radius: 4px;
-      }
-      button:hover {
-        background-color: #f0f8ff;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>エイトトゥエルブNOWへようこそ</h1>
-    <p>架空のコンビニ「エイトトゥエルブ」の在庫を確認する簡易 SPA である．</p>
+<head>
+  <meta charset="UTF-8">
+  <title>エイトNOW</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+    }
+    #itemsArea div {
+      margin-bottom: 8px;
+    }
+    button {
+      font-size: 1rem;
+      padding: 0.5em 1em;
+      cursor: pointer;
+      border-radius: 4px;
+      border: 1px solid #007bff;
+      background-color: #ffffff;
+    }
+    button:hover {
+      background-color: #f0f8ff;
+    }
+    #historySection {
+      margin-top: 20px;
+      border: 1px solid #999;
+      padding: 10px;
+    }
+    .historyItem {
+      margin-bottom: 4px;
+    }
+    .resetBtn {
+      margin-left: 15px;
+      border: 1px solid #dc143c;
+      background-color: #ffecec;
+    }
+    .resetBtn:hover {
+      background-color: #ffcccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>エイトNOW (リセット＆購入履歴表示版)</h1>
+  <p>エイトトゥエルブの商品を購入することができます</p>
 
-    <!-- 在庫一覧取得ボタン -->
-    <button id="showItems">商品一覧を表示</button>
+  <!-- ボタン類 -->
+  <button id="showItems">在庫一覧を表示</button>
+  <button id="resetBtn" class="resetBtn">在庫リセット</button>
 
-    <!-- 在庫一覧を表示する領域 -->
-    <div id="itemsArea"></div>
+  <!-- 在庫データ表示エリア -->
+  <div id="itemsArea"></div>
 
-    <!-- クライアントサイドの JS -->
-    <script src="box.js"></script>
-  </body>
+  <!-- 購入履歴表示エリア -->
+  <div id="historySection">
+    <h3>購入履歴</h3>
+    <div id="historyList"></div>
+    <p>合計金額: <span id="totalCost">0</span> 円</p>
+  </div>
+
+  <script src="/public/box.js"></script>
+</body>
 </html>

@@ -4,22 +4,24 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 
-// 簡易的な在庫データ (メモリ上で管理)
-let items = [
-  { id: "A0001", name: "エイトトゥエルブサンド", price: 350, stock: 12 },
-  { id: "A0002", name: "エイトトゥエルブコーヒー", price: 180, stock: 25 },
-  { id: "A0003", name: "エイトトゥエルブおにぎり", price: 120, stock: 5 },
+// リセット用の「初期在庫」
+const ORIGINAL_ITEMS = [
+  { id: "N0001", name: "エイト特製カツサンド", price: 480, stock: 15 },
+  { id: "N0002", name: "エイトプレミアムコーヒー", price: 210, stock: 50 },
+  { id: "N0003", name: "エイト手巻きおにぎり こだわりシャケ", price: 120, stock: 20 },
 ];
+
+// 実際に操作される在庫データ　起動時は ORIGINAL_ITEMS をコピーして使用
+let items = JSON.parse(JSON.stringify(ORIGINAL_ITEMS));
 
 const server = http.createServer((req, res) => {
   if (req.method === "GET") {
+    // 静的ファイルの配信 (box.html, box.js 等)
     let filePath = "";
-    if (req.url === "/") {
-      // ルートにアクセスされた場合 box.html を返す
+    if (req.url === "/public/box") {
       filePath = path.join(__dirname, "public", "box.html");
     } else {
-      // /box.js など，public ディレクトリ内の静的ファイルを返す
-      filePath = path.join(__dirname, "public", req.url);
+      filePath = path.join(__dirname, "public", req.url.replace("/public/", ""));
     }
 
     fs.readFile(filePath, (err, data) => {
@@ -27,47 +29,40 @@ const server = http.createServer((req, res) => {
         res.statusCode = 404;
         return res.end("File not found");
       }
+      // 拡張子で Content-Type を切り替え
       if (filePath.endsWith(".html")) {
-        res.setHeader("Content-Type", "text/html; charset=UTF-8");
+        res.setHeader("Content-Type", "text/html; charset=utf-8");
       } else if (filePath.endsWith(".js")) {
-        res.setHeader("Content-Type", "text/javascript; charset=UTF-8");
-      } else if (filePath.endsWith(".css")) {
-        res.setHeader("Content-Type", "text/css; charset=UTF-8");
+        res.setHeader("Content-Type", "text/javascript; charset=utf-8");
       }
       res.statusCode = 200;
       res.end(data);
     });
 
   } else if (req.method === "POST") {
-    // 在庫一覧を返す
     if (req.url === "/api/getItems") {
+      // 在庫一覧取得
       let bodyData = "";
-      req.on("data", (chunk) => {
-        bodyData += chunk;
-      });
+      req.on("data", (chunk) => { bodyData += chunk; });
       req.on("end", () => {
-        // 今回は bodyData は使用しないが，読み込みだけ行う
-        const jsonResponse = JSON.stringify({ items: items });
+        const responseObj = { items: items };
         res.setHeader("Content-Type", "application/json");
         res.statusCode = 200;
-        res.end(jsonResponse);
+        res.end(JSON.stringify(responseObj));
       });
 
-    // 購入処理
     } else if (req.url === "/api/buyItem") {
+      // 購入処理
       let bodyData = "";
-      req.on("data", (chunk) => {
-        bodyData += chunk;
-      });
+      req.on("data", (chunk) => { bodyData += chunk; });
       req.on("end", () => {
         try {
           const body = JSON.parse(bodyData);
           const { itemId, quantity } = body;
-
           if (!itemId || !quantity) {
-            throw new Error("リクエストが不正です");
+            throw new Error("リクエスト形式が不正です");
           }
-
+          // 商品を検索
           const target = items.find((i) => i.id === itemId);
           if (!target) {
             const resp = { success: false, msg: "商品が見つかりません" };
@@ -81,10 +76,18 @@ const server = http.createServer((req, res) => {
             res.statusCode = 200;
             return res.end(JSON.stringify(resp));
           }
-
-          // 在庫を減らして応答
+          // 在庫を減算
           target.stock -= quantity;
-          const resp = { success: true, msg: "購入が完了しました" };
+          // 購入情報をレスポンスに含める
+          const resp = {
+            success: true,
+            msg: "購入が完了しました",
+            purchasedItem: {
+              name: target.name,
+              quantity: quantity,
+              price: target.price,
+            },
+          };
           res.setHeader("Content-Type", "application/json");
           res.statusCode = 200;
           return res.end(JSON.stringify(resp));
@@ -96,16 +99,31 @@ const server = http.createServer((req, res) => {
           return res.end(JSON.stringify(resp));
         }
       });
+
+    } else if (req.url === "/api/resetItems") {
+      // 在庫リセット
+      items = JSON.parse(JSON.stringify(ORIGINAL_ITEMS));
+      const resp = {
+        success: true,
+        msg: "在庫をリセットしました",
+        items: items,
+      };
+      res.setHeader("Content-Type", "application/json");
+      res.statusCode = 200;
+      res.end(JSON.stringify(resp));
+
     } else {
       res.statusCode = 404;
-      res.end("Not found");
+      res.end("Not Found");
     }
   } else {
+    // GET, POST 以外は 405 (Method Not Allowed)
     res.statusCode = 405;
     res.end("Method Not Allowed");
   }
 });
 
+// ポート8080でサーバ起動
 server.listen(8080, () => {
-  console.log("Server listening on http://localhost:8080");
+  console.log("Example app listening on http://localhost:8080/public/box");
 });
