@@ -171,27 +171,6 @@ monthly_fortune.ejsを出力 --> ブラウザに運勢を表示;
 - `http://localhost:8080/highlow`
 2. 表示される画面で，“High”または”Low”のボタンをクリックする．
 3. 結果と偽チバニーからのコメントが表示される．
-#### フローチャート
-```mermaid
-sequenceDiagram
-    participant Webブラウザ
-    participant Webサーバ
-    participant エイトNOWクライアント
-    participant エイトNOWサーバ
-
-    Webブラウザ->>Webサーバ: 1. Webページの取得
-    Webサーバ-->>Webブラウザ: 2. HTML, JS, CSS
-
-    Webブラウザ->>エイトNOWクライアント: 3. 起動
-    エイトNOWクライアント->>エイトNOWサーバ: 4. GetItems(在庫一覧取得)
-    エイトNOWサーバ-->>エイトNOWクライアント: 5. 在庫データ(JSON)
-
-    エイトNOWクライアント->>エイトNOWサーバ: 6. BuyItem(商品購入)
-    エイトNOWサーバ-->>エイトNOWクライアント: 7. 購入結果(JSON)
-
-    エイトNOWクライアント->>エイトNOWサーバ: 8. ResetItems(在庫リセット)
-    エイトNOWサーバ-->>エイトNOWクライアント: 9. リセット結果(JSON)
-```
 
 ### 注意事項
 
